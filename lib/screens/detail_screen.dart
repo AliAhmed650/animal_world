@@ -166,7 +166,11 @@ class _SoundSectionState extends State<SoundSection> {
     if (!mounted) return;
     setState(() {
       _loading = false;
-      if (!ok) _msg = 'تعذّر تشغيل الصوت. تأكد من اتصالك بالإنترنت وحاول مرة أخرى.';
+      if (!ok) {
+        final err = SoundPlayer.lastError;
+        _msg = 'تعذّر تشغيل الصوت. تأكد من اتصالك بالإنترنت وحاول مرة أخرى.'
+            '${err == null ? '' : '\n$err'}';
+      }
     });
   }
 
